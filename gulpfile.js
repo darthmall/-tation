@@ -6,8 +6,11 @@ const del = require('del');
 const fs = require('fs');
 const gulp = require('gulp');
 const http = require('http');
+const path = require('path');
 const q = require('q');
 const querystring = require('querystring');
+const shapefile = require('shapefile');
+const unzip = require('unzip');
 
 const GEONAMES = 'api.geonames.org';
 const GEOUSER = '?username=demo&';
@@ -27,7 +30,7 @@ function fetch(path) {
 
   let body = '';
 
-  $.util.log('Fetching ', $.util.colors.cyan(path));
+  $.util.log('Fetching', $.util.colors.cyan(path));
 
   http.get(options, (res) => {
     res.on('data', (chunk) => {
@@ -87,6 +90,41 @@ function fetchCities(countries) {
   }));
 }
 
+/**
+ * Fetch shape data from naturalearthdata.com and convert it geojson
+ *
+ * @return a promise (resolved with nothing)
+ */
+function fetchShapes() {
+  const deferred = q.defer();
+  const options = {
+    'host': 'naciscdn.org',
+    'path': '/naturalearth/110m/cultural/ne_110m_admin_0_countries.zip'
+  };
+
+  $.util.log('Fetching', $.util.colors.cyan(options.path));
+
+  http.get(options, (res) => {
+    res.pipe(unzip.Extract({ path: 'data/' }))
+      .on('finish', () => {
+        $.util.log('Writing', $.util.colors.cyan('AQ.geojson'));
+
+        shapefile.read('data/ne_110m_admin_0_countries', (err, coll) => {
+          if (err) {
+            deferred.reject(new Error(err));
+          } else {
+            // Filter out countries except antarctica
+            let feature = _.find(coll.features, (f) => f.properties.postal === 'AQ');
+            fs.writeFileSync('data/AQ.geojson', JSON.stringify(feature));
+            deferred.resolve();
+          }
+        });
+      });
+  });
+
+  return deferred.promise;
+}
+
 gulp.task('data', function (cb) {
   try {
     fs.statSync('data');
@@ -95,8 +133,7 @@ gulp.task('data', function (cb) {
     fs.mkdirSync('data');
   }
 
-  fetchCountryInfo()
-    .then(fetchCities)
+  q.all([fetchShapes(), fetchCountryInfo().then(fetchCities)])
     .then(() => {
       $.util.log('Fetched all data');
       cb();
