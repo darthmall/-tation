@@ -1,0 +1,19 @@
+{
+  "name": "tation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "W. Evan Sheehan <wallace.sheehan@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-util": "^3.0.7",
+    "lodash": "^3.10.1",
+    "q": "^1.4.1"
+  }
+}
