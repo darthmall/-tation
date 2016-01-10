@@ -1,0 +1,31 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+      <!--[if lt IE 8]>
+          <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+
+      {{#suffixes}}
+      <figure>
+        <h2>{{suffix}}</h2>
+        <p title="{{city.name}}">1 place</p>
+        <svg width="400" height="400">
+          {{#circles}}
+          <circle cx="{{x}}" cy="{{y}}" r="{{r}}"
+            stroke="none" fill="{{fill}}"></circle>
+          {{/circles}}
+          <circle cx="{{city.x}}" cy="{{city.y}}" r="{{city.r}}"
+            stroke="none" fill="{{city.fill}}">
+              <title>{{city.name}}</title>
+            </circle>
+        </svg>
+      </figure>
+      {{/suffixes}}
+  </body>
+</html>

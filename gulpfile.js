@@ -12,6 +12,8 @@ const querystring = require('querystring');
 const shapefile = require('shapefile');
 const unzip = require('unzip');
 
+const app = require('./src/js/index.js');
+
 const GEONAMES = 'api.geonames.org';
 const GEOUSER = '?username=demo&';
 
@@ -80,7 +82,7 @@ function fetchCities(countries) {
   return q.all(countries.map((country) => {
     const bbox = _.pick(country, 'north', 'south', 'east', 'west');
     const path = '/citiesJSON' + GEOUSER + querystring.stringify(bbox)
-    const citiesFile = 'data/' + country.countryCode + '.json';
+    const citiesFile = 'data/' + country.countryCode + '_cities.json';
 
     return fetch(path)
       .then((body) => {
@@ -107,7 +109,7 @@ function fetchShapes() {
   http.get(options, (res) => {
     res.pipe(unzip.Extract({ path: 'data/' }))
       .on('finish', () => {
-        $.util.log('Writing', $.util.colors.cyan('AQ.geojson'));
+        $.util.log('Writing', $.util.colors.cyan('AQ.json'));
 
         shapefile.read('data/ne_110m_admin_0_countries', (err, coll) => {
           if (err) {
@@ -115,7 +117,7 @@ function fetchShapes() {
           } else {
             // Filter out countries except antarctica
             let feature = _.find(coll.features, (f) => f.properties.postal === 'AQ');
-            fs.writeFileSync('data/AQ.geojson', JSON.stringify(feature));
+            fs.writeFileSync('data/AQ.json', JSON.stringify(feature));
             deferred.resolve();
           }
         });
@@ -143,10 +145,15 @@ gulp.task('data', function (cb) {
     });
 });
 
-gulp.task('build');
+gulp.task('build', function () {
+  gulp.src('./src/mustache/*.mustache')
+    .pipe($.mustache(app()))
+    .pipe($.rename('index.html'))
+    .pipe(gulp.dest('.'));
+});
 
 gulp.task('clean', function () {
-  return del(['data/']);
+  return del(['data/', 'index.html']);
 });
 
 gulp.task('default', ['build']);
