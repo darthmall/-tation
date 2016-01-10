@@ -1,7 +1,7 @@
 # -tation
 
 A visual scherzo inspired by Moritz Stefaner’s [-ach, -ingen, -zell][1]
-and Mahir Yavuz’s [U.S. Suffix Density][2] visualizations.
+and Marko Plahuta’s [U.S. Suffix Density][2] visualizations.
 
 ## Setup
 

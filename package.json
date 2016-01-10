@@ -1,7 +1,7 @@
 {
   "name": "tation",
   "version": "1.0.0",
-  "description": "A visual scherzo inspired by Moritz Stefaner’s -ach, -ingen, -zell and Mahir Yavuz’s U.S. Suffix Density visualizations",
+  "description": "A visual scherzo inspired by Moritz Stefaner’s -ach, -ingen, -zell and Marko Plahuta’s U.S. Suffix Density visualizations",
   "main": "src/js/index.js",
   "author": "W. Evan Sheehan <wallace.sheehan@gmail.com>",
   "license": "MIT",
