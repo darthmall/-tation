@@ -86,15 +86,38 @@ p {
 }
 
 a {
+  border-bottom: 1px solid @highlight;
   color: @fg;
   text-decoration: none;
-  border-bottom: 2px solid @highlight;
   white-space: nowrap;
-  .italic
+
+  .italic;
 }
 
 em {
-  .italic
+  .italic;
+}
+
+footer {
+  clear: both;
+  font-size: 80%;
+  padding: 2em 0;
+  text-align: center;
+
+  hr {
+    background-color: @darkblue;
+    border: none;
+    height: 1px;
+    margin: 2em auto;
+    width: 30%;
+  }
+
+  p {
+    border: none;
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+  }
 }
 
 circle {

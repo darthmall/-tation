@@ -425,7 +425,7 @@ th {
 
 @font-face {
   font-family: "HK Grotesk";
-  src: url("/fonts/HKGrotesk-Regular.otf");
+  src: url("/fonts/HKGrotesk-Light.otf");
 }
 @font-face {
   font-family: "Noto Serif";
@@ -439,7 +439,7 @@ th {
   font-weight: bold;
 }
 .italic {
-  font-family: "Noto Serif";
+  font-family: "Noto Serif", serif;
   font-style: italic;
   font-size: 90%;
 }
@@ -489,18 +489,37 @@ p {
   max-width: 45em;
 }
 a {
+  border-bottom: 1px solid #C8FF6B;
   color: #F0F2FF;
   text-decoration: none;
-  border-bottom: 2px solid #C8FF6B;
   white-space: nowrap;
-  font-family: "Noto Serif";
+  font-family: "Noto Serif", serif;
   font-style: italic;
   font-size: 90%;
 }
 em {
-  font-family: "Noto Serif";
+  font-family: "Noto Serif", serif;
   font-style: italic;
   font-size: 90%;
+}
+footer {
+  clear: both;
+  font-size: 80%;
+  padding: 2em 0;
+  text-align: center;
+}
+footer hr {
+  background-color: #484E61;
+  border: none;
+  height: 1px;
+  margin: 2em auto;
+  width: 30%;
+}
+footer p {
+  border: none;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
 }
 circle {
   fill: #484E61;
