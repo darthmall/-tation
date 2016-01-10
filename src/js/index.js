@@ -15,7 +15,7 @@ module.exports = function () {
 
   // Orthographic projection rotated and scaled for Antarctica
   const projection = d3.geo.orthographic()
-    .scale(400)
+    .scale(500)
     .translate([width / 2, height / 2])
     .clipAngle(90)
     .rotate([0, 90]);
