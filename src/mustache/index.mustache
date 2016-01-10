@@ -42,12 +42,10 @@
       </figcaption>
       <svg width="388" height="388">
         {{#circles}}
-        <circle cx="{{x}}" cy="{{y}}" r="{{r}}"></circle>
-        {{/circles}}
-        <circle cx="{{city.x}}" cy="{{city.y}}" r="{{city.r}}"
-            class="city">
+        <circle class="{{className}}" cx="{{x}}" cy="{{y}}" r="{{r}}">
           <title>{{city.name}}</title>
         </circle>
+        {{/circles}}
       </svg>
     </figure>
     {{/suffixes}}

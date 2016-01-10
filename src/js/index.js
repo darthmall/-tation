@@ -42,15 +42,36 @@ module.exports = function () {
       const p = projection([city.lng, city.lat]);
       const suffix = '-' + city.name.slice(-6);
 
+      // Brute force search for the dot in the grid that is nearest to
+      // this city. Also duplicates each dot from the master grid so that
+      // so that subsequent cities don't tromp all over it.
+      let delta = Infinity;
+      let winner = null;
+      let dots = circles.map((c) => {
+        let a = c.x - p[0];
+        let b = c.y - p[1];
+        let dist = Math.sqrt(a*a + b*b);
+
+        let d = {
+          'x': c.x,
+          'y': c.y,
+          'r': r
+        };
+
+        if (dist < delta) {
+          delta = dist;
+          winner = d;
+        }
+
+        return d;
+      });
+
+      winner.name = city.name;
+      winner.className = 'city';
+
       return {
         'suffix': suffix,
-        'circles': _.cloneDeep(circles),
-        'city': {
-          'name': city.name,
-          'x': p[0],
-          'y': p[1],
-          'r': r,
-        }
+        'circles': dots,
       };
     })
     .sort((a, b) => d3.ascending(a.suffix, b.suffix));
