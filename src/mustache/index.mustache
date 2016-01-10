@@ -15,14 +15,12 @@
     <h1>-tation</h1>
     <h2>Density of common suffixes in populated areas of Antarctica</h2>
     <p>
-      A visual scherzo inspired by
-      <a href="https://twitter.com/moritz_stefaner">Moritz Stefaner</a>&rsquo;s
+      A visual scherzo inspired by Moritz Stefaner&rsquo;s
       <a href="http://truth-and-beauty.net/experiments/ach-ingen-zell/">
-      -ach, -ingen, -zell</a> and
-      <a href="https://twitter.com/mahir_nyc">Mahir Yavuz</a>&rsquo;s
+      -ach, -ingen, -zell</a> and Mahir Yavuz&rsquo;s
       <a href="http://virostatiq.com/data-visualizations/us-suffix-density/">
       U.S. Suffix Density</a> visualizations, both of which are great and
-      far less silly than this one. Darker circles represent higher
+      far less silly than this one. Brighter circles represent higher
       relative density of that suffix in that area relative to other areas
       of Antarctica.
     </p>
@@ -39,16 +37,15 @@
     {{#suffixes}}
     <figure>
       <figcaption>
-        <h3>{{suffix}}</h3>
-        <p title="{{city.name}}">1 place</p>
+        <em>{{suffix}}</em>
+        <span title="{{city.name}}">1 place</span>
       </figcaption>
-      <svg width="400" height="400">
+      <svg width="388" height="388">
         {{#circles}}
-        <circle cx="{{x}}" cy="{{y}}" r="{{r}}"
-            stroke="none" fill="{{fill}}"></circle>
+        <circle cx="{{x}}" cy="{{y}}" r="{{r}}"></circle>
         {{/circles}}
         <circle cx="{{city.x}}" cy="{{city.y}}" r="{{city.r}}"
-            stroke="none" fill="{{city.fill}}">
+            class="city">
           <title>{{city.name}}</title>
         </circle>
       </svg>
