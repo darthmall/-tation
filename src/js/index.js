@@ -15,7 +15,7 @@ module.exports = function () {
 
   // Orthographic projection rotated and scaled for Antarctica
   const projection = d3.geo.orthographic()
-    .scale(500)
+    .scale(410)
     .translate([width / 2, height / 2])
     .clipAngle(90)
     .rotate([0, 90]);
@@ -44,21 +44,22 @@ module.exports = function () {
   }
 
   const suffixes = cities.geonames.map((city) => {
-    const p = projection([city.lng, city.lat]);
-    const suffix = '-' + city.name.slice(-6);
+      const p = projection([city.lng, city.lat]);
+      const suffix = '-' + city.name.slice(-6);
 
-    return {
-      'suffix': suffix,
-      'circles': _.cloneDeep(circles),
-      'city': {
-        'name': city.name,
-        'x': p[0],
-        'y': p[1],
-        'r': r,
-        'fill': fill(0.3)
-      }
-    };
-  });
+      return {
+        'suffix': suffix,
+        'circles': _.cloneDeep(circles),
+        'city': {
+          'name': city.name,
+          'x': p[0],
+          'y': p[1],
+          'r': r,
+          'fill': fill(0.5)
+        }
+      };
+    })
+    .sort((a, b) => d3.ascending(a.suffix, b.suffix));
 
   return {
     'suffixes': suffixes

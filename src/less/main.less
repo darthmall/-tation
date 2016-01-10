@@ -1,0 +1,40 @@
+@import (inline) "normalize.css";
+
+@screen-md-min: 820px;
+@screen-lg-min: 1230px;
+
+html {
+  background-color: #DCDCDC
+  color: #36363C;
+  font-family: 'Helvetica Neue' 'Helvetica' 'Arial' sans-serif;
+  font-size: 16pt;
+  line-height: 1.3;
+}
+
+body {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+figure {
+  background-color: rgba(0,0,0,0.2);
+  float: left;
+  margin: 0 0 5px 0;
+}
+
+@media(min-width: @screen-md-min) {
+  body {
+    max-width: @screen-md-min;
+  }
+
+  figure {
+    margin: 0 5px 5px 5px;
+  }
+}
+
+@media(min-width: @screen-lg-min) {
+  body {
+    max-width: @screen-lg-min;
+  }
+
+}

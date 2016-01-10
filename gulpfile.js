@@ -145,6 +145,14 @@ gulp.task('data', function (cb) {
     });
 });
 
+gulp.task('less', function () {
+  return gulp.src('./src/less/main.less')
+    .pipe($.less({
+      paths: [path.join(__dirname, 'src', 'css')]
+    }))
+    .pipe(gulp.dest('.'));
+});
+
 gulp.task('build', function () {
   gulp.src('./src/mustache/*.mustache')
     .pipe($.mustache(app()))
@@ -152,10 +160,19 @@ gulp.task('build', function () {
     .pipe(gulp.dest('.'));
 });
 
+gulp.task('watch', function () {
+  gulp.watch('./src/less/**/*.less', ['less']);
+  gulp.watch([
+      './src/js/**/*.js',
+      './src/mustache/**/*.mustache'
+    ],
+    ['build']);
+});
+
 gulp.task('clean', function () {
   return del(['data/', 'index.html']);
 });
 
-gulp.task('default', ['build']);
+gulp.task('default', ['build', 'less']);
 
-gulp.task('all', ['data', 'build']);
+gulp.task('all', ['data', 'build', 'less']);
